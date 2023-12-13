@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page of your e-cart</title>
+    <style>
+      form {
+        margin: 30px 6.5%;
+  border: 5px solid #f1f1f1;
+  align-items: center;
+}
+input[type=text], input[type=password] {
+  width: 28%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  
+}
+.container{
+  align-content: center;
+}
+button {
+  background-color: #20b9c7;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 8px;
+  border: none;
+  cursor: pointer;
+  width: 20%;
+}
+body{
+  background-image: linear-gradient(to right, rgb(225, 150, 200), rgb(227, 227, 139));
+}
+
+    </style>
+    <script>
+        function loginChk(){
+            //alert("ghj")
+            var mapUserDetails = new Map([["Nag","user1"],[ "Venky","user2"],["Ram","user3"],["Kaushik","user4"],["Priya","user5"]]);
+            var uname1 = document.getElementById("uname").value;
+            var psw1 = document.getElementById("psw").value;
+            //alert(mapUserDetails.get(uname1))
+            if (mapUserDetails.get(uname1) == psw1 ){ 
+              //alert("yes");
+              //document.href="http://www.google.com";
+              window.location.href = "home2.html";
+            }
+            else{
+              alert("Check user name and password for login");
+            }
+            //alert("yes");
+        }
+    </script>
+</head>
+<body>
+  <br><br><br>
+    <h2 align="center" style="font-size: 25px; color: rgb(133, 4, 82);" >LOGIN FORM</h2>
+    <br>
+<form method="post" >
+  <div class="container" align="center">
+    <br><br>
+    <label for="uname"><b style="font-size: 18px;color: #0528b5;">USERNAME</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+    <br>
+    <label for="psw"><b style="font-size: 18px;color:#0528b5;">PASSWORD</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" id="psw"required>
+    <br><br>
+    <button type="button" onclick="loginChk()" style="font: bold;font-size: 17px;">Login</button>
+  <br>
+</div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body{
+            background-image: linear-gradient(to left, rgb(92, 207, 220), rgb(230, 230, 162));
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #c9c584;
+        }
+    </style>
+    <script>
+        var xmlProducts = "<?xml version='1.0'?><products><product id='A1B2C3'><name>Nike Air Max</name><price>3999</price><tax>10%</tax></product><product id='D4E5F6'><name>Adidas Superstar</name><price>2999</price><tax>12%</tax></product>  <product id='G7H8I9'><name>Puma RS-X</name><price>3499</price><tax>17%</tax></product>  <product id='J0K1L2'><name>Reebok Classic</name><price>2499</price><tax>12%</tax></product>  <product id='M3N4O5'><name>New Balance 574</name><price>2999</price><tax>12%</tax></product>  <product id='P6Q7R8'><name>Converse Chuck Taylor</name><price>1999</price><tax>12%</tax></product>  <product id='S9T0U1'><name>Vans Old Skool</name><price>1999</price><tax>12%</tax></product>  <product id='V2W3X4'><name>Skechers D'Lites</name><price>2499</price><tax>12%</tax></product>  <product id='Y5Z6A7'><name>Fila Disruptor</name><price>2999</price><tax>12%</tax></product>  <product id='B8C9D0'><name>Asics Gel-Kayano</name><price>4499</price><tax>12%</tax></product>  <product id='E1F2G3'><name>Saucony Jazz</name><price>2499</price><tax>12%</tax></product>  <product id='H4I5J6'><name>Brooks Ghost</name><price>3999</price><tax>12%</tax></product>  <product id='K7L8M9'><name>Mizuno Wave Rider</name><price>3999</price><tax>12%</tax></product>  <product id='N0O1P2'><name>Under Armour HOVR</name><price>3499</price><tax>12%</tax></product>  <product id='Q3R4S5'><name>Crocs LiteRide</name><price>1499</price><tax>12%</tax></product>  <product id='T6U7V8'><name>Bata Power</name><price>999</price><tax>12%</tax></product>  <product id='W9X0Y1'><name>Woodland Adventure</name><price>2999</price><tax>12%</tax></product>  <product id='Z2A3B4'><name>Lee Cooper Casual</name><price>1999</price><tax>12%</tax></product>  <product id='C5D6E7'><name>Red Tape Formal</name><price>2499</price><tax>12%</tax></product>  <product id='F8G9H0'><name>Clarks Originals</name><price>4999</price><tax>12%</tax></product>  <product id='I1J2K3'><name>Tommy Hilfiger Sport</name><price>3999</price><tax>12%</tax></product>  <product id='L4M5N6'><name>Lacoste Classic</name><price>4499</price><tax>12%</tax></product>  <product id='O7P8Q9'><name>Hush Puppies Comfort</name><price>2999</price><tax>12%</tax></product>  <product id='R0S1T2'><name>U.S. Polo Assn. Fashion</name><price>2499</price><tax>12%</tax></product>  <product id='U3V4W5'><name>DC Skate</name><price>1999</price><tax>12%</tax></product>  <product id='X6Y7Z8'><name>Ecco Biom</name><price>4999</price><tax>12%</tax></product>  <product id='A9B0C1'><name>Merrell Trail</name><price>3999</price><tax>12%</tax></product>  <product id='D2E3F4'><name>Salomon Speedcross</name><price>4499</price><tax>12%</tax></product>  <product id='G5H6I7'><name>Columbia Peakfreak</name><price>3499</price><tax>12%</tax></product>  <product id='J8K9L0'><name>Timberland Earthkeepers</name><price>4999</price><tax>12%</tax></product></products>"
+        var newPara,newText;
+        var array1=[];
+        var i =0;
+        
+        function addtable1(){
+            var myParser;
+            var newProdID = document.getElementById("snoProduct").value;
+            //alert(newProdID);
+            myParser = new DOMParser();
+            myXmlDocument = myParser.parseFromString(xmlProducts,"text/xml");
+            //alert('XML Loaded');
+            var prodObj = myXmlDocument.getElementsByTagName("product");
+            //alert(prodObj[newProdID].childNodes[1].firstChild.nodeValue);
+            var productid=document.sample.snoProduct.value;
+            var Quantity=document.sample.qnProduct.value;
+            //alert(array1.includes(productid));
+            //alert(array1);
+            if ((array1.includes(productid)==true)){
+                /*addItems();
+                var table2 = document.getElementById("tb1");
+                var rowIndex1 = document.getElementById("id_prod").rowIndex;
+                table2.deleteRow(rowIndex1);
+                document.getElementById("TB1").deleteRow(0);*/
+                //alert("yes");
+                updateItems();
+            }else{
+                if((array1.includes(productid)==false) && i<=4){
+                    array1.push(productid);
+                    i++;
+                    addItems();
+                }
+                else{
+                    alert("PRODUCTS ARE FILLED IN THE CART");
+                    return;
+                }
+            }
+            function updateItems(){
+                var row = document.getElementById(newProdID);
+                var qty = row.getElementsByClassName("qt_prod")[0];
+                var tp = row.getElementsByClassName("tp_prod")[0];
+                var price=row.getElementsByClassName("pr_prod")[0];
+                var tax1=row.getElementsByClassName("tax_prod")[0];
+                var tp=row.getElementsByClassName("tp_prod")[0];
+                var updated_qty=parseInt(qty.innerHTML)+parseInt(Quantity);
+                var net_price=(parseInt(price.innerHTML)*parseInt(tax1.innerHTML.substring(0,2)))/100+parseInt(price.innerHTML);
+                console.log(parseInt(qty.innerHTML)+" "+parseInt(tax1.innerHTML.substring(0,2)));
+                var updated_tp=net_price*updated_qty;
+                qty.innerHTML=updated_qty;
+                tp.innerHTML=Math.round(updated_tp);
+                
+            }
+            function addItems(){
+
+                var tr = document.createElement('tr');
+                tr.id=newProdID;
+                var taxValue=  parseFloat(prodObj[newProdID].childNodes[2].firstChild.nodeValue) || 0;
+            
+                var taxOfProduct= (prodObj[newProdID].childNodes[1].firstChild.nodeValue*(taxValue/100));
+                var tempPrice = Number(prodObj[newProdID].childNodes[1].firstChild.nodeValue)+taxOfProduct;
+
+                var td1 = tr.appendChild(document.createElement('td'));
+                td1.className="name_prod";
+                var td2 = tr.appendChild(document.createElement('td'));
+                td2.className = 'name_prod';
+                var td3 = tr.appendChild(document.createElement('td'));
+                td3.className = 'qt_prod';
+                var td4 = tr.appendChild(document.createElement('td'));
+                td4.className = 'pr_prod';
+                var td5 = tr.appendChild(document.createElement('td'));
+                td5.className = 'tax_prod';
+                var td6 = tr.appendChild(document.createElement('td'));
+                td6.className = 'tp_prod';
+                
+                td1.innerHTML=productid;
+                td2.innerHTML=prodObj[newProdID].childNodes[0].firstChild.nodeValue;
+                td3.innerHTML= Quantity;
+                td4.innerHTML=prodObj[newProdID].childNodes[1].firstChild.nodeValue;
+                td5.innerHTML=prodObj[newProdID].childNodes[2].firstChild.nodeValue;
+                var tempTotal =Math.round(tempPrice)* Quantity
+                    //alert(Math.round(tempPrice))
+                td6.innerHTML= tempTotal ;
+                    // alert(totalAmount);
+                document.getElementById("tbl").appendChild(tr);
+            }
+        }
+        function numberToWords(number) {
+            var res;
+            var units = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            var teens = ['', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+            var tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninty'];
+            console.log(number);
+            if (number == 0) {
+            res= 'zero';
+            }
+            else if(number<10){
+                res=units[number];
+            }
+            else if(number>10 && number<20){
+                res=teens[number%10];
+            }
+            else if(number<100 && number%10==0){
+                res=tens[number/10];
+            }
+            else if(number<100){
+                res=tens[parseInt(number/10)]+" "+units[number%10];
+            }
+            else if(number>=100 && number<1000 && number%100==0){
+                res=units[parseInt(number/100)]+" hundred";
+            }
+            else if(number>100 && number<1000){
+                res=units[parseInt(number/100)]+" hundred and "+ numberToWords(parseInt(number%100));
+            }
+            else if(number>=1000 && number<10000 && number%1000==0){
+                res=units[parseInt(number/1000)]+" thousand";
+            }
+            else if(number>1000 && number<10000){
+                res=units[parseInt(number/1000)]+" thousand "+ numberToWords(parseInt(number%1000));
+            }
+            else if(number>=10000 && number%1000==0){
+                res=numberToWords(parseInt(number/1000))+" thousand";
+            }
+            else if(number>10000 && number<100000){
+                res=numberToWords(parseInt(number/1000))+" thousand "+ numberToWords(parseInt(number%1000));
+ 
+            }
+            else{
+                res="Invalid Input";
+            }
+            return res.toUpperCase();
+        }
+        function openWin(){
+            // var w=  window.open("","b", "width=500px, height=600px");
+            // var table3 = document.getElementById("table_div");
+            // w.document.write("<h1 style= 'text-align: center;'>Bill Page</h1>");
+            // w.document.write(table3.innerHTML);
+            // w.document.write("<h6 id='display'>Total Amount</h6>");
+            //var tp_1=document.getElementById("tb1");
+            var w=  window.open("","b", "width=500px, height=600px");
+            var table3 = document.getElementById("table_div");
+            w.document.write("<h1 style= 'text-align: center; color: rgb(142, 4, 89); '>Bill Page</h1>");
+            w.document.write("<div align='center'>"+table3.innerHTML+"</div>");
+            var ta=0;
+            for(var id=0;id<array1.length;id++){
+                var row = document.getElementById(array1[id]);
+                var tp = row.getElementsByClassName("tp_prod")[0];
+                ta+=parseInt(tp.innerHTML);
+            }
+            console.log(ta);
+            w.document.write("<h4 style= 'text-align: center;'> Total amount: "+ta+"</h4>");
+            var temp1=numberToWords(ta+500);
+            if (ta>0){
+                w.document.write("<h5 style= 'text-align: center;'> Shipping Cost is 500 </h5>");
+                var disp="<h3>"+"</h3><h3 >"+"<h3 >Total price have to pay is: "+(ta+500)+"</h3><h3 style='color: green;'>"+temp1+"</h3></h3>";
+                var div=document.createElement("div");
+                div.align="center";
+                div.innerHTML=disp;
+                w.document.body.appendChild(div);  }
+            else{
+                w.document.write("<h3 align='center' style='color: red;'>Zero items are selected</h3>");
+            }         
+}
+</script>
+</head>
+<body>
+    <br>
+    <h1 style="color: rgb(163, 84, 5); font-size: 35px; text-align: center;"><marquee >WELCOME TO THE ACME GROCERS STORE</marquee></h1>
+    <br>
+    
+    <div class="container">
+        <form method="POST" name="sample">
+        
+        <div style="color: rgb(142, 4, 89); font-size: 20px; text-align: center;" >
+            PRODUCT ID : <input type="text" name="snoProduct" id="snoProduct" >
+            <br><br>
+            QUANTITY : <input type="number" name="qnProduct" id="qnProduct" >
+        </div>
+        <br><br>
+        <input type="button" name="add" value="Add Item" onclick="addtable1();" style="margin: auto; display:block;  font-size: 16px; "><br><hr><br>
+        <div id="table_div" >
+            <table id="tbl" class="table" border="1">
+            <tr>
+                <th>ProductId</th>
+                <th>Name</th>
+                <th> Quantity </th>
+                <th>Price</th>
+                <th>Tax</th>
+                <th class="count_me">Line Total</th>
+            </tr>
+        </table>
+    </div>
+        </form>
+        </div>
+        <div class="totalAmountPrint">
+            <h3 id="disp"></h3>
+            <p id="grandTotal" style="padding: 5px;"></p>
+        </div>
+        <div id="buttonDiv" align="right">
+            <button onclick="openWin()" id="billButton"  style=" padding: 12px 12px; font-size: 15px; color: rgb(1, 1, 163); font: bold;">Generate Bill</button>
+        </div>
+</body>
+</html>
